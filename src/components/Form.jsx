@@ -47,7 +47,7 @@ export default function Form({ handleSubmit }) {
 
 	// todo,date,time,timestampをAPIを使用してGASに送信する
 	const onSubmit = (e) => {
-		e.preventDefault()
+		// e.preventDefault()
 
 		//// const timestamp = new Date() //作成した日時のDateオブジェクト  ( Fri Oct 16 2020 01:25:33 GMT+0900 (日本標準時))
 		//! timestampはGASで作成することとする
@@ -62,9 +62,6 @@ export default function Form({ handleSubmit }) {
 		// handleSubmitは親ComponentのAppからのprops
 		console.log('formResults:  ', formResults)
 		handleSubmit(formResults)
-		setTodo('')
-		setDate('')
-		setTime('')
 	}
 
 	return (
