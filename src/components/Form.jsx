@@ -26,8 +26,46 @@ const useStyles = makeStyles((theme) => ({
 	},
 }))
 
-export default function Form() {
+export default function Form({ handleSubmit }) {
 	const classes = useStyles()
+
+	//TODO state
+	const [todo, setTodo] = useState('')
+	const [date, setDate] = useState('')
+	const [time, setTime] = useState('')
+
+	// TODO methods
+	const OnInputTodo = (e) => {
+		setTodo(e.target.value)
+	}
+	const OnInputDate = (e) => {
+		setDate(e.target.value)
+	}
+	const OnInputTime = (e) => {
+		setTime(e.target.value)
+	}
+
+	// todo,date,time,timestampをAPIを使用してGASに送信する
+	const onSubmit = (e) => {
+		e.preventDefault()
+
+		//// const timestamp = new Date() //作成した日時のDateオブジェクト  ( Fri Oct 16 2020 01:25:33 GMT+0900 (日本標準時))
+		//! timestampはGASで作成することとする
+
+		const formResults = {
+			todo, //string  "提出物忘れずに"
+			date, //string  "2020-10-15"
+			time, //string  "09:17"
+			//// timestamp, //Dateオブジェクト
+		}
+
+		// handleSubmitは親ComponentのAppからのprops
+		console.log('formResults:  ', formResults)
+		handleSubmit(formResults)
+		setTodo('')
+		setDate('')
+		setTime('')
+	}
 
 	return (
 		<Container component='main' maxWidth='xs'>
@@ -37,7 +75,7 @@ export default function Form() {
 					LINE TODO App
 				</Typography>
 
-				<form className={classes.form} noValidate>
+				<form className={classes.form} noValidate onSubmit={onSubmit}>
 					<TextField
 						variant='outlined'
 						margin='normal'
@@ -48,6 +86,7 @@ export default function Form() {
 						label='TODO'
 						name='todo'
 						autoFocus={true}
+						onChange={OnInputTodo}
 					/>
 					<TextField
 						variant='outlined'
@@ -58,6 +97,7 @@ export default function Form() {
 						label='日付'
 						type='date'
 						id='date'
+						onChange={OnInputDate}
 					/>
 					<TextField
 						variant='outlined'
@@ -68,6 +108,7 @@ export default function Form() {
 						label='時刻'
 						type='time'
 						id='time'
+						onChange={OnInputTime}
 					/>
 
 					<Button type='submit' fullWidth variant='contained' color='primary' className={classes.submit}>
