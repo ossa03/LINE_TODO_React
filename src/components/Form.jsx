@@ -81,7 +81,7 @@ export default function Form({ handleSubmit }) {
 			<CssBaseline />
 			<div className={classes.paper}>
 				<Typography component='h1' variant='h5'>
-					LINE TODO App
+					LIFF LINE TODO App
 				</Typography>
 
 				{submitted ? (
